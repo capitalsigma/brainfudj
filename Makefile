@@ -1,5 +1,5 @@
-# BASE=/home/patrick/hacking/compilers/antlr/antlr-arith
-BASE=.
+BASE=/home/patrick/hacking/compilers/antlr/brainfudj
+# BASE=`pwd`
 OUT=$(BASE)/out
 INPUT=$(BASE)/grammar/Brainfuck.gr4
 JAVA=$(BASE)/java

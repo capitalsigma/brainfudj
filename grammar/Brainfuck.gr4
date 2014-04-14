@@ -1,0 +1,24 @@
+grammar Brainfuck;
+
+
+// Lexer rules
+MV_RT : '>';
+MV_LEFT : '<';
+INC : '+';
+DEC : '-';
+OUTPUT : '.';
+INPUT : ',';
+START_WHILE : '[';
+END_WHILE : ']';
+IGNORE : ~('>' | '<' | '+' | '-' | '.' | ',' | '[' | ']')+ -> skip;
+// IGNORE : ~(MV_RT | MV_LEFT | INC | DEC
+//         | OUTPUT | INPUT | START_WHILE | END_WHILE) -> skip;
+
+// Parser rules
+exp : op=(MV_LEFT | MV_RT)              # MoveExp
+    | op=(INC | DEC)                    # ArithExp
+    | op=(OUTPUT | INPUT)               # IoExp
+    | START_WHILE exp+ END_WHILE        # WhileExp
+    ;
+
+program : exp+;
