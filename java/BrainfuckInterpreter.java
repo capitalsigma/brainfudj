@@ -26,7 +26,7 @@ public class BrainfuckInterpreter {
 			eval.visit(tree);
 
 
-			System.out.println("-------------------------------------");
+			System.out.println("\n=======================");
 		}
 	}
 }

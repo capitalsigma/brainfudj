@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.lang.Byte;
 import java.lang.ArrayIndexOutOfBoundsException;
 import org.antlr.v4.runtime.misc.NotNull;
+import java.util.InputMismatchException;
 
 public class EvalVisitor extends BrainfuckBaseVisitor<Void> {
 	List<Byte> tape = new ArrayList<Byte>(asList(new Byte((byte)0)));
@@ -35,8 +36,13 @@ public class EvalVisitor extends BrainfuckBaseVisitor<Void> {
 			System.out.printf("%c", toPrint);
 			break;
 		case BrainfuckParser.INPUT:
-			tape.set(currentPoint, scanner.next(".").getBytes()[0]);
-			break;
+			try {
+				byte next = (byte)System.in.read();
+				tape.set(currentPoint, next);
+				break;
+			} catch (java.io.IOException e) {
+				System.out.println("An io exception occurred.");
+			}
 		}
 
 		return null;
